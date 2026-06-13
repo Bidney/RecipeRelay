@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recipe Relay</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Recipe Relay</p>
+        <h1>Send ingredients to your phone</h1>
+      </div>
+      <span id="statusDot" class="status-dot" aria-hidden="true"></span>
+    </header>
+
+    <section id="statusCard" class="card status-card">
+      <p id="statusText">Open a recipe page, then click Extract recipe.</p>
+      <div class="actions">
+        <button id="extractBtn" class="primary">Extract recipe</button>
+        <button id="manualBtn" class="secondary">Paste manually</button>
+      </div>
+    </section>
+
+    <section id="manualCard" class="card hidden">
+      <div class="recipe-header compact">
+        <div>
+          <p class="label">Manual import</p>
+          <h2>Paste ingredients</h2>
+        </div>
+        <button id="closeManualBtn" class="secondary small" type="button">Close</button>
+      </div>
+      <label class="field-label" for="manualTitle">Recipe title</label>
+      <input id="manualTitle" class="text-input" type="text" maxlength="120" placeholder="Shopping list">
+      <label class="field-label spaced" for="manualIngredients">Ingredients, one per line</label>
+      <textarea id="manualIngredients" class="textarea" rows="7" placeholder="2 lemons&#10;1 bunch parsley&#10;3 cloves garlic"></textarea>
+      <button id="useManualBtn" class="primary top-gap" type="button">Use pasted list</button>
+    </section>
+
+    <section id="recipeCard" class="card hidden">
+      <div class="recipe-header">
+        <div>
+          <p class="label">Shopping list</p>
+          <h2 id="recipeTitle">Untitled recipe</h2>
+          <p id="recipeMeta" class="muted"></p>
+        </div>
+        <button id="refreshBtn" class="secondary small" type="button">Refresh</button>
+      </div>
+
+      <div class="options">
+        <label><input id="keepQtyToggle" type="checkbox" checked> Keep quantities</label>
+        <label><input id="pantryToggle" type="checkbox" checked> Hide pantry basics</label>
+      </div>
+
+      <div id="items" class="items"></div>
+
+      <div class="edit-tools">
+        <input id="addItemInput" class="text-input" type="text" maxlength="160" placeholder="Add an item">
+        <button id="addItemBtn" class="secondary" type="button">Add</button>
+      </div>
+      <div class="mini-actions">
+        <button id="selectAllBtn" class="secondary small" type="button">Select all</button>
+        <button id="clearAllBtn" class="secondary small" type="button">Clear all</button>
+      </div>
+
+      <div class="transfer-box">
+        <p class="label">Phone transfer</p>
+        <p class="help">The QR contains the shopping list directly. No backend, no account, and no setup.</p>
+      </div>
+
+      <div class="actions">
+        <button id="copyBtn" class="secondary" type="button">Copy list</button>
+        <button id="qrBtn" class="primary" type="button">Generate QR</button>
+      </div>
+    </section>
+
+    <section id="qrCard" class="card hidden">
+      <div class="qr-header">
+        <div>
+          <p class="label">Ready to scan</p>
+          <h2>Scan this QR</h2>
+        </div>
+      </div>
+
+      <div class="qr-wrap">
+        <canvas id="qrCanvas" width="256" height="256" aria-label="Shopping list QR code"></canvas>
+      </div>
+      <p id="qrNote" class="muted center"></p>
+
+      <div class="actions stacked">
+        <button id="copyQrTextBtn" class="secondary" type="button">Copy QR text</button>
+      </div>
+    </section>
+
+    <section class="support-card" aria-label="Support Recipe Relay">
+      <p>Recipe Relay is free and offline-first.</p>
+      <a class="support-link" href="https://buycoffee.to/bidney" target="_blank" rel="noopener noreferrer">Support the project</a>
+    </section>
+  </main>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
